@@ -312,3 +312,87 @@ tr:nth-child(even) {
         padding: 10px;
     }
 }
+
+
+/* --- Responsive tableau pour petits écrans max 700px --- */
+@media only screen and (max-width: 700px) {
+
+    .table-wrapper table, 
+    .table-wrapper thead, 
+    .table-wrapper tbody, 
+    .table-wrapper tr, 
+    .table-wrapper th, 
+    .table-wrapper td {
+        display: block;
+    }
+
+    .table-wrapper thead {
+        display: none;
+    }
+
+    .table-wrapper td {
+        padding-left: 150px;
+        position: relative;
+        margin-top: -1px;
+        background: #fff; /* blanc */
+        color: #2c3e50; /* texte foncé */
+    }
+
+    .table-wrapper td:nth-child(odd) {
+        background-color: #f9f9f9; /* gris clair */
+    }
+
+    /* Les étiquettes à gauche */
+    .table-wrapper td::before {
+        padding: 10px;
+        content: attr(data-label);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 130px;
+        bottom: 0;
+        background-color: #3498db; /* bleu */
+        color: #fff;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-family: 'Avenir', sans-serif;
+    }
+
+    /* Marges homogènes pour le contenu (texte et boutons) */
+    .table-wrapper td > * {
+        margin-left: 10px; /* même marge à gauche pour tous les éléments enfants */
+    }
+
+    /* Conteneur pour aligner les boutons côte à côte et centrer */
+    .table-wrapper td .button-group {
+        display: flex;
+        gap: 10px; /* espace entre boutons */
+        justify-content: center; /* centre horizontalement */
+        margin-left: 10px; /* même marge que le reste */
+    }
+
+    /* Styles pour les boutons */
+    .table-wrapper td button {
+        width: 100px;          /* largeur fixe identique */
+        padding: 8px 0;        /* padding vertical pour taille uniforme */
+        font-family: 'Avenir', sans-serif;
+        background-color: #2980b9; /* bleu foncé */
+        color: white;
+        border: none;
+        border-radius: 0;      /* tu avais 0px, gardé */
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .table-wrapper tr {
+        margin-bottom: 1rem;
+    }
+
+    .table-wrapper th + td {
+        padding-left: 10px;
+    }
+}
+
+
