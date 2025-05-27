@@ -53,9 +53,13 @@
                         </select>
                 </td>
                 <td>
+                    {% if session['user'] == 'admin' %}
+                    
                         <button type="submit" class="btn">Modifier</button>
                     </form>
                     <a href="{{ url_for('delete_absence', id=a.id) }}" class="btn">Supprimer</a>
+
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
