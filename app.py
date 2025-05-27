@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
@@ -120,7 +121,8 @@ def export_excel():
     output.seek(0)
     return send_file(output, download_name="absences.xlsx", as_attachment=True)
 
+# EXECUTION
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
