@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 from io import BytesIO
 import datetime
-import os
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -86,7 +85,7 @@ def add_absence():
 
 @app.route('/edit_absence/<int:id>', methods=['POST'])
 def edit_absence(id):
-    if 'user' not in session:
+    if 'user' not in session or session['user'] != 'admin':
         return redirect(url_for('login'))
     absence = Absence.query.get_or_404(id)
     absence.date = datetime.datetime.strptime(request.form['date'], "%Y-%m-%d")
@@ -96,7 +95,7 @@ def edit_absence(id):
 
 @app.route('/delete_absence/<int:id>')
 def delete_absence(id):
-    if 'user' not in session:
+    if 'user' not in session or session['user'] != 'admin':
         return redirect(url_for('login'))
     absence = Absence.query.get_or_404(id)
     db.session.delete(absence)
@@ -124,5 +123,4 @@ def export_excel():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
