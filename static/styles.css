@@ -1,0 +1,281 @@
+/* styles.css */
+
+/* --- Police et base --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Avenir', sans-serif;
+}
+
+/* --- Connexion --- */
+body.login-body {
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form input,
+.login-form .btn {
+    width: 100%;
+    padding: 12px 15px; /* marge intérieure uniforme */
+    border-radius: 0;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.login-form input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+
+.login-form .btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-form .btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.02);
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* --- Tableau de bord --- */
+body.dashboard-body {
+    background: #f4f4f4;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container h1,
+.container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+form input[type="text"],
+form select,
+form input[type="date"] {
+    padding: 12px 15px;
+    border-radius: 0;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+form input:focus,
+form select:focus,
+form input[type="date"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+
+form button,
+.container button {
+    padding: 12px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover,
+.container button:hover {
+    background-color: #2980b9;
+    transform: scale(1.02);
+}
+
+/* --- Boutons génériques --- */
+.btn,
+a.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    margin: 10px 5px 10px 0;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover,
+a.btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Bouton de déconnexion */
+a.btn.logout {
+    background-color: #e74c3c;
+}
+
+a.btn.logout:hover {
+    background-color: #c0392b;
+}
+
+/* --- Liste --- */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: #ecf0f1;
+    margin: 5px 0;
+    padding: 12px;
+    border-radius: 0;
+    font-size: 16px;
+    color: #2c3e50;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Tableaux --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    table-layout: auto;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Correction des champs dans cellules */
+td form {
+    display: inline-block;
+    margin: 0;
+}
+
+td button,
+td input {
+    vertical-align: middle;
+}
+
+/* Entête tableau */
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    body.dashboard-body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+        margin: 20px auto;
+        width: 95%;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    form select,
+    form input[type="date"],
+    form button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    td > .btn,
+    td > form > button {
+        margin: 5px 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container h1, .container h2 {
+        font-size: 1.5em;
+    }
+
+    form select,
+    form input[type="date"],
+    form button,
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

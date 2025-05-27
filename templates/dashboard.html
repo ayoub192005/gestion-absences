@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <div class="container">
+        <h1>Tableau de bord (Admin)</h1>
+        <a href="{{ url_for('logout') }}" class="btn">Déconnexion</a>
+        <h2>Ajouter un employé</h2>
+        <form method="POST" action="{{ url_for('add_employee') }}">
+            <input type="text" name="name" placeholder="Nom de l'employé" required>
+            <button type="submit" class="btn">Ajouter</button>
+        </form>
+
+        <h2>Liste des employés</h2>
+        <ul>
+            {% for emp in employees %}
+                <li>{{ emp.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
