@@ -45,19 +45,19 @@
                 <tbody>
                     {% for a in absences %}
                     <tr>
-                        <td>{{ a.employee.name }}</td>
-                        <td>
+                        <td data-label="Employé">{{ a.employee.name }}</td>
+                        <td data-label="Date">
                             <form method="POST" action="{{ url_for('edit_absence', id=a.id) }}">
                                 <input type="date" name="date" value="{{ a.date }}">
                         </td>
-                        <td>
+                        <td data-label="Type">
                                 <select name="type">
                                     <option value="journée" {% if a.type == 'journée' %}selected{% endif %}>Journée</option>
                                     <option value="demi-journée" {% if a.type == 'demi-journée' %}selected{% endif %}>Demi-journée</option>
                                     <option value="congé" {% if a.type == 'congé' %}selected{% endif %}>Congé</option>
                                 </select>
                         </td>
-                        <td class="actions-cell">
+                        <td data-label="Actions" class="actions-cell">
                             {% if session['user'] == 'admin' %}
                                 <div class="responsive-actions">
                                     <button type="submit" class="btn">Modifier</button>
