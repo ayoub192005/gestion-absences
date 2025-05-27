@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion des absences</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Important ! -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body class="dashboard-body">
     <div class="container">
         <h1>Gestion des absences</h1>
-        <a href="{{ url_for('logout') }}" class="btn">Déconnexion</a>
+        <a href="{{ url_for('logout') }}" class="btn logout">Déconnexion</a>
 
         {% if session['user'] == 'admin' %}
             <a href="{{ url_for('dashboard') }}" class="btn">Ajouter des employés</a>
@@ -16,13 +17,13 @@
 
         <h2>Ajouter une absence</h2>
         <form method="POST" action="{{ url_for('add_absence') }}">
-            <select name="employee_id">
+            <select name="employee_id" required>
                 {% for emp in employees %}
                     <option value="{{ emp.id }}">{{ emp.name }}</option>
                 {% endfor %}
             </select>
             <input type="date" name="date" required>
-            <select name="type">
+            <select name="type" required>
                 <option value="journée">Journée</option>
                 <option value="demi-journée">Demi-journée</option>
                 <option value="congé">Congé</option>
@@ -31,39 +32,45 @@
         </form>
 
         <h2>Liste des absences</h2>
-        <table>
-            <tr>
-                <th>Employé</th>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Actions</th>
-            </tr>
-            {% for a in absences %}
-            <tr>
-                <td>{{ a.employee.name }}</td>
-                <td>
-                    <form method="POST" action="{{ url_for('edit_absence', id=a.id) }}">
-                        <input type="date" name="date" value="{{ a.date }}">
-                </td>
-                <td>
-                        <select name="type">
-                            <option value="journée" {% if a.type == 'journée' %}selected{% endif %}>Journée</option>
-                            <option value="demi-journée" {% if a.type == 'demi-journée' %}selected{% endif %}>Demi-journée</option>
-                            <option value="congé" {% if a.type == 'congé' %}selected{% endif %}>Congé</option>
-                        </select>
-                </td>
-                <td>
-                    {% if session['user'] == 'admin' %}
-                    
-                        <button type="submit" class="btn">Modifier</button>
-                    </form>
-                    <a href="{{ url_for('delete_absence', id=a.id) }}" class="btn">Supprimer</a>
-
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employé</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in absences %}
+                    <tr>
+                        <td>{{ a.employee.name }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('edit_absence', id=a.id) }}">
+                                <input type="date" name="date" value="{{ a.date }}">
+                        </td>
+                        <td>
+                                <select name="type">
+                                    <option value="journée" {% if a.type == 'journée' %}selected{% endif %}>Journée</option>
+                                    <option value="demi-journée" {% if a.type == 'demi-journée' %}selected{% endif %}>Demi-journée</option>
+                                    <option value="congé" {% if a.type == 'congé' %}selected{% endif %}>Congé</option>
+                                </select>
+                        </td>
+                        <td class="actions-cell">
+                            {% if session['user'] == 'admin' %}
+                                <div class="responsive-actions">
+                                    <button type="submit" class="btn">Modifier</button>
+                                    </form>
+                                    <a href="{{ url_for('delete_absence', id=a.id) }}" class="btn">Supprimer</a>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <a href="{{ url_for('export_excel') }}" class="btn">Exporter en Excel</a>
     </div>
